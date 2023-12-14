@@ -17,17 +17,17 @@ user_input_form.addEventListener("submit", (e) => {
     cards_container.appendChild(card);
 });
 
+// when edit or delete buttons are clicked, handle them with delegation
+cards_container.addEventListener("click", (e) => {
+    let clickedElt = e.target; 
+
+    if(clickedElt.getAttribute("btn_type") === "delete"){
+        clickedElt.parentElement.parentElement.remove();
+    }
+})
+
 function createCard({destinationName, locationName, photoUrl, descript}) {
-    /*
-    <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <button class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-    */
+    
     const card =  document.createElement("div");
     card.classList.add("card")
     card.setAttribute("style", "width: 18rem;")
@@ -36,14 +36,10 @@ function createCard({destinationName, locationName, photoUrl, descript}) {
         <div class="card-body">
             <h5 class="card-title">${destinationName}</h5>
             <p class="card-text">${locationName}</p>
-            ${descript && '<p class="card-text">${descript}</p>'}
-            <button type="button" class="btn btn-info">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            ${descript && `<p class="card-text">${descript}</p>`}
+            <button type="button" btn_type="edit" class="btn btn-info">Edit</button>
+            <button type="button" btn_type="delete" class="btn btn-danger">Delete</button>
         </div>
         `
-    
-    
-
-
     return card;
 }
