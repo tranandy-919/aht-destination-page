@@ -23,8 +23,40 @@ cards_container.addEventListener("click", (e) => {
 
     if(clickedElt.getAttribute("btn_type") === "delete"){
         clickedElt.parentElement.parentElement.remove();
+    } else if(clickedElt.getAttribute("btn_type") === "edit") {
+        handleEdit(clickedElt)
     }
 })
+
+function handleEdit(editBtn) {
+    const cardBody = editBtn.parentElement
+    const oldDest = cardBody.children[0].textContent;
+    const oldLoc = cardBody.children[1].textContent;
+    const oldUrl = cardBody.previousSiblingElement.getAttribute("src");
+
+    const oldDesc = cardBody.children[2].tagName === "P" ? cardBody.children[2].textContent : "";
+
+    const destinationName = prompt("Enter new destination name", oldDest)
+    const locationName = prompt("Enter new destination name", oldLoc)
+    const urlName = prompt("Enter new destination name", oldUrl)
+    const descName = prompt("Enter new destination name", oldDesc)
+
+    if(destinationName && destinationName !== oldDest){
+        cardBody.children[0].textContent = destinationName;
+    }
+
+    if(locationName && locationName !== oldLoc){
+        cardBody.children[1].textContent = destinationName;
+    }
+
+    if(oldUrl && oldUrl !== oldUrl){
+        cardBody.children[0].textContent = destinationName;
+    }
+
+    if(descName && descName !== oldDesc){
+        cardBody.children[0].textContent = destinationName;
+    }
+}
 
 function createCard({destinationName, locationName, photoUrl, descript}) {
     
